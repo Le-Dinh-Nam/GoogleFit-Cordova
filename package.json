@@ -1,0 +1,21 @@
+{
+    "version": "0.1",
+    "name": "com.nakhon.gfit",
+    "cordova_name": "Google Fit Plugin",
+    "description": "Google Fit Plugin for Ionic Projects",
+    "license": "MIT",
+    "repo": "",
+    "issue": "",
+    "keywords": [
+        "cordova",
+        "googlefit",
+        "fitness",
+        "fit",
+        "health"
+    ],
+    "platforms": [
+        "android",
+    ],
+    "engines": [],
+    "englishdoc": ""
+}
