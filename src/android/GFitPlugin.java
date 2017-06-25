@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -38,6 +39,8 @@ import android.util.Log;
 public class GFitPlugin extends CordovaPlugin {
      
     public static final String TAG = "Google Fit Plugin";
+	
+	private static final int REQUEST_OAUTH = 1;
 
 	private GoogleApiClient googleApiClient;
      
@@ -87,7 +90,7 @@ public class GFitPlugin extends CordovaPlugin {
 			@Override
 			public void onConnectionSuspended(int statusCode) {
 				Log.i(TAG, "Connection suspended.");
-				callback.error(Connection.getStatusString(statusCode));
+				callback.error(statusCode);
 			}
 		});
 
@@ -106,7 +109,7 @@ public class GFitPlugin extends CordovaPlugin {
 					} catch (IntentSender.SendIntentException e) {
 						Log.i(TAG, "OAuth login failed", e);
 
-						callback.error(Connection.getStatusString(connectionResult.getErrorCode()));
+						callback.error(connectionResult.getErrorCode());
 					}
 				} else {
 					// Show the localized error dialog
@@ -114,7 +117,7 @@ public class GFitPlugin extends CordovaPlugin {
 
 					GooglePlayServicesUtil.getErrorDialog(connectionResult.getErrorCode(), getActivity(), 0).show();
 
-					callback.error(Connection.getStatusString(connectionResult.getErrorCode()));
+					callback.error(connectionResult.getErrorCode());
 				}
 			}
 		});
@@ -127,7 +130,7 @@ public class GFitPlugin extends CordovaPlugin {
 	public void subscribe() {
         // To create a subscription, invoke the Recording API. As soon as the subscription is
         // active, fitness data will start recording.
-        Fitness.RecordingApi.subscribe(client, DataType.TYPE_STEP_COUNT_CUMULATIVE)
+        Fitness.RecordingApi.subscribe(googleApiClient, DataType.TYPE_STEP_COUNT_CUMULATIVE)
                 .setResultCallback(new ResultCallback<Status>() {
                     @Override
                     public void onResult(Status status) {
