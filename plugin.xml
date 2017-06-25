@@ -7,8 +7,6 @@
     <description>Google Fit Plugin</description>
     <license>MIT</license>
     <keywords>cordova,googlefit,health,fitness,fit</keywords>
-    <repo></repo>
-    <issue></issue>
 
     <js-module src="www/GFitPlugin.js" name="GFitPlugin">
         <clobbers target="GFitPlugin" />
