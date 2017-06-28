@@ -175,7 +175,7 @@ public class GFitPlugin extends CordovaPlugin {
                 });
     }
 
-    public boolean execute(final String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    public boolean execute(final String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
              
         // Shows a toast
         Log.v(TAG,"Google Fit Plugin received: "+ action);
